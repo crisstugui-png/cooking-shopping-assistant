@@ -76,6 +76,14 @@ function App() {
     refreshAssets();
   }, []);
 
+  // Poll assets periodically to ensure real-time updates when files change
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refreshAssets();
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   // Auto-scroll chat
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
