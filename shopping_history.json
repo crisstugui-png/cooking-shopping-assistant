@@ -1,0 +1,18 @@
+[
+  {
+    "date": "2026-06-26",
+    "items": [
+      {
+        "name": "pasta",
+        "price": 2.5,
+        "quantity": 1
+      },
+      {
+        "name": "canned crushed tomatoes",
+        "price": 3.0,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 5.5
+  }
+]
