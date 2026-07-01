@@ -52,7 +52,8 @@ def finish_recipe(recipe_name: str, ingredients: list[str], quantities: list[str
 
 def record_purchase(items: list[dict], date: str = None) -> dict:
     """Appends a new purchase record to the local shopping history.
-    Call this tool when the user reports back with what they bought from their shopping trip.
+    Call this tool ONLY when the user explicitly confirms they have actually purchased/bought the items.
+    DO NOT call this tool for recipe discussions, shopping lists, or planned future trips.
 
     Args:
         items: A list of items purchased. Each item must be a dictionary with 'name' (str), 'price' (float), and optional 'quantity' (int, default 1). E.g. [{"name": "eggs", "price": 4.99, "quantity": 1}]

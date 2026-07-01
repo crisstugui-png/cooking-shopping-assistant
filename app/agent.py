@@ -214,9 +214,10 @@ def intent_classifier(ctx: Context, node_input: dict) -> dict:
             model='gemini-flash-lite-latest',
             contents=[
                 "Analyze the user's message and classify their intent as 'cooking', 'budget', or 'unknown'.\n"
-                "- 'cooking': Discussing recipes, suggestions, cooking meals, cooking advice.\n"
-                "- 'budget': Reporting shopping items and prices, receipt contents, or querying spending history.\n"
+                "- 'cooking': Discussing recipe ideas, suggestions, cooking meals, cooking advice, or planning ingredients.\n"
+                "- 'budget': Explicitly reporting purchases/grocery items bought (with or without prices), receipt contents, or querying spending/expense history.\n"
                 "- 'unknown': Greetings, chitchat, or unrelated topics.\n\n"
+                "CRITICAL: If the user is only discussing ingredients, asking recipe questions, or selecting ingredients for a recipe but has NOT explicitly confirmed they actually bought/purchased them, classify this as 'cooking'. DO NOT classify general recipe/ingredient discussions as 'budget' unless there is clear confirmation that a purchase took place.\n\n"
                 f"User Message:\n{user_text}"
             ],
             config=genai_types.GenerateContentConfig(
@@ -339,7 +340,9 @@ budget_instruction = """You are a personal budget and grocery expense assistant.
 Your job is to manage the user's shopping history and answer their questions about expenses.
 
 You have two main tasks:
-1. Log new shopping trips. When the user reports what they bought (a list of items and prices, or text extracted from a receipt image), extract the names, prices, and quantities, then call the `record_purchase` tool to save them.
+1. Log new shopping trips. Call the `record_purchase` tool ONLY when the user explicitly confirms that they have actually purchased/bought the items (e.g., "I bought...", "Here is what I spent...", or when providing a receipt image of bought items).
+   - CRITICAL: DO NOT record a purchase if the user is just discussing recipe ingredients, planning a shopping list, or listing items without confirming they were bought.
+   - If the user lists items but it's not clear whether they bought them, or they did not provide prices, ask them to confirm if they purchased those items and to specify the prices. Do NOT call `record_purchase` with $0.00 unless they confirm they bought/received them for $0.00.
 2. Query grocery shopping history. Call the `get_shopping_history` tool to retrieve past purchases and answer user queries (e.g. total costs this week, price of eggs this month, average bill, etc.).
 
 Be precise in your calculations and friendly in your replies!
