@@ -305,7 +305,7 @@ def shopping_agent(ctx: Context, node_input: dict):
     
     md_lines = [
         f"# Shopping List for {recipe_name}",
-        f"Generated on {datetime.date.today().isoformat()}",
+        f"Generated on {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
         "",
         "Here are the ingredients you need to buy:",
         ""
