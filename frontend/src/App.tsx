@@ -175,6 +175,7 @@ function App() {
       }
 
       const requestBody = {
+        appName: 'app',
         userId,
         sessionId,
         newMessage: {
@@ -230,6 +231,7 @@ function App() {
 
     try {
       const requestBody = {
+        appName: 'app',
         userId,
         sessionId,
         newMessage: {
