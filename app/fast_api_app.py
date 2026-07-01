@@ -46,8 +46,11 @@ except Exception:
     logger = LocalLogger()
     logger.warning("Google Cloud Credentials not found. Falling back to local logging.")
 allow_origins = (
-    os.getenv("ALLOW_ORIGINS", "").split(",") if os.getenv("ALLOW_ORIGINS") else None
+    os.getenv("ALLOW_ORIGINS", "").split(",") if os.getenv("ALLOW_ORIGINS")
+    else ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:5174", "http://127.0.0.1:5174"]
 )
+if allow_origins and "*" in allow_origins:
+    allow_origins = ["regex:.*"]
 
 # Artifact bucket for ADK (created by Terraform, passed via env var)
 logs_bucket_name = os.environ.get("LOGS_BUCKET_NAME")
