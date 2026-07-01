@@ -53,6 +53,19 @@ function App() {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Create session on the backend
+  const createBackendSession = async (sessId: string) => {
+    try {
+      await fetch(`/api/apps/app/users/${userId}/sessions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId: sessId })
+      });
+    } catch (err) {
+      console.error("Error creating backend session:", err);
+    }
+  };
+
   // Initialize or fetch session
   useEffect(() => {
     let sessId = localStorage.getItem('assistant_session_id');
@@ -61,6 +74,7 @@ function App() {
       localStorage.setItem('assistant_session_id', sessId);
     }
     setSessionId(sessId);
+    createBackendSession(sessId);
     refreshAssets();
   }, []);
 
@@ -73,6 +87,7 @@ function App() {
     const sessId = 'session_' + Math.random().toString(36).substring(2, 15);
     localStorage.setItem('assistant_session_id', sessId);
     setSessionId(sessId);
+    createBackendSession(sessId);
     setMessages([
       {
         id: 'welcome',
