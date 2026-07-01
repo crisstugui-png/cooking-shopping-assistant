@@ -124,6 +124,28 @@ function App() {
     }
   };
 
+  const handleCheckboxToggle = async (lineIndex: number) => {
+    const lines = shoppingList.split('\n');
+    const line = lines[lineIndex];
+    if (line.startsWith('- [ ] ')) {
+      lines[lineIndex] = '- [x] ' + line.substring(6);
+    } else if (line.startsWith('- [x] ')) {
+      lines[lineIndex] = '- [ ] ' + line.substring(6);
+    }
+    const newContent = lines.join('\n');
+    setShoppingList(newContent);
+
+    try {
+      await fetch('/api/shopping-list', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: newContent })
+      });
+    } catch (err) {
+      console.error("Failed to save updated shopping list:", err);
+    }
+  };
+
   // Convert File to Base64 (strips MIME prefix for raw bytes)
   const convertToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -395,7 +417,11 @@ function App() {
             const content = line.substring(6);
             return (
               <label key={idx} className="checkbox-item">
-                <input type="checkbox" defaultChecked={isChecked} readOnly />
+                <input 
+                  type="checkbox" 
+                  checked={isChecked} 
+                  onChange={() => handleCheckboxToggle(idx)} 
+                />
                 <span>{content}</span>
               </label>
             );

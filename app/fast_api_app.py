@@ -96,6 +96,10 @@ def collect_feedback(feedback: Feedback) -> dict[str, str]:
 
 from fastapi.responses import PlainTextResponse
 import json
+from pydantic import BaseModel
+
+class SaveShoppingListRequest(BaseModel):
+    content: str
 
 @app.get("/shopping-list", response_class=PlainTextResponse)
 def get_shopping_list():
@@ -105,6 +109,18 @@ def get_shopping_list():
         with open(path, "r") as f:
             return f.read()
     return "No shopping list generated yet."
+
+@app.post("/shopping-list")
+def save_shopping_list(req: SaveShoppingListRequest):
+    """Writes the updated shopping list to disk."""
+    path = os.path.join(AGENT_DIR, "shopping_list.md")
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(req.content)
+        return {"status": "success"}
+    except Exception as e:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.get("/shopping-history")
