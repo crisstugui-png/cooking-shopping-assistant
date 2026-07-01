@@ -406,3 +406,7 @@ app = App(
     root_agent=workflow,
     name="app"
 )
+
+root_agent = workflow
+
+
