@@ -20,6 +20,7 @@ from google.cloud import logging as google_cloud_logging
 
 from app.app_utils.telemetry import setup_telemetry
 from app.app_utils.typing import Feedback
+from pydantic import BaseModel
 
 setup_telemetry()
 try:
