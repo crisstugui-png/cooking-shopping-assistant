@@ -47,9 +47,7 @@ function App() {
   const [pendingInterrupt, setPendingInterrupt] = useState<{ id: string; message: string } | null>(null);
 
   // Feedback States
-  const [activeFeedbackId, setActiveFeedbackId] = useState<string | null>(null);
-  const [feedbackComment, setFeedbackComment] = useState('');
-  const [feedbackRating, setFeedbackRating] = useState<number | null>(null);
+  const [ratedMessages, setRatedMessages] = useState<Record<string, 'up' | 'down'>>({});
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -325,8 +323,6 @@ function App() {
           text: cleanText
         }
       ]);
-      // Open feedback for this message
-      setActiveFeedbackId(newMsgId);
     }
 
     if (interruptObj) {
@@ -344,25 +340,27 @@ function App() {
   };
 
   // Feedback submission
-  const handleFeedbackSubmit = async () => {
-    if (feedbackRating === null) return;
+  const submitQuickFeedback = async (msgId: string, isPositive: boolean) => {
+    const score = isPositive ? 5 : 1;
+    const ratingType = isPositive ? 'up' : 'down';
+    
+    setRatedMessages(prev => ({
+      ...prev,
+      [msgId]: ratingType
+    }));
+
     try {
       await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          score: feedbackRating,
-          comment: feedbackComment || "No comment provided",
+          score,
+          comment: `Quick feedback: ${ratingType.toUpperCase()}`,
           session_id: sessionId
         })
       });
-      alert("Thank you for your feedback!");
     } catch (err) {
       console.error("Failed to submit feedback:", err);
-    } finally {
-      setActiveFeedbackId(null);
-      setFeedbackComment('');
-      setFeedbackRating(null);
     }
   };
 
@@ -493,6 +491,29 @@ function App() {
                     </div>
                   )}
                   <p className="message-text">{msg.text}</p>
+                  
+                  {msg.sender === 'model' && msg.id !== 'welcome' && (
+                    <div className="message-quick-feedback">
+                      <button 
+                        type="button"
+                        className={`feedback-icon-btn ${ratedMessages[msg.id] === 'up' ? 'active' : ''}`}
+                        onClick={() => submitQuickFeedback(msg.id, true)}
+                        disabled={!!ratedMessages[msg.id]}
+                        title="Helpful"
+                      >
+                        👍
+                      </button>
+                      <button 
+                        type="button"
+                        className={`feedback-icon-btn ${ratedMessages[msg.id] === 'down' ? 'active' : ''}`}
+                        onClick={() => submitQuickFeedback(msg.id, false)}
+                        disabled={!!ratedMessages[msg.id]}
+                        title="Unhelpful"
+                      >
+                        👎
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -588,43 +609,7 @@ function App() {
         </section>
       </main>
 
-      {/* FEEDBACK POPUP */}
-      {activeFeedbackId && (
-        <div className="feedback-overlay">
-          <div className="feedback-card">
-            <h3>How was the agent's response?</h3>
-            <div className="rating-options">
-              <button 
-                type="button" 
-                className={`rating-btn ${feedbackRating === 5 ? 'selected' : ''}`} 
-                onClick={() => setFeedbackRating(5)}
-              >
-                👍 Helpful
-              </button>
-              <button 
-                type="button" 
-                className={`rating-btn ${feedbackRating === 1 ? 'selected' : ''}`} 
-                onClick={() => setFeedbackRating(1)}
-              >
-                👎 Unhelpful
-              </button>
-            </div>
-            <textarea
-              placeholder="Any additional comments/suggestions?"
-              value={feedbackComment}
-              onChange={(e) => setFeedbackComment(e.target.value)}
-            />
-            <div className="feedback-actions">
-              <button className="btn-primary" onClick={handleFeedbackSubmit} disabled={feedbackRating === null}>
-                Submit
-              </button>
-              <button className="btn-secondary" onClick={() => setActiveFeedbackId(null)}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
     </div>
   );
 }
