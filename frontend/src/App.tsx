@@ -41,7 +41,8 @@ function App() {
   // Split Panel Tab States
   const [shoppingList, setShoppingList] = useState('');
   const [shoppingHistory, setShoppingHistory] = useState<PurchaseRecord[]>([]);
-  const [activeTab, setActiveTab] = useState<'shopping-list' | 'shopping-history'>('shopping-list');
+  const [activeTab, setActiveTab] = useState<'shopping-list' | 'shopping-history' | 'receipts-log'>('shopping-list');
+  const [uploadedReceipts, setUploadedReceipts] = useState<string[]>([]);
 
   // Hijacking Guardrail (Interrupt) States
   const [pendingInterrupt, setPendingInterrupt] = useState<{ id: string; message: string } | null>(null);
@@ -119,8 +120,13 @@ function App() {
         const data = await histRes.json();
         setShoppingHistory(data);
       }
+      const receiptsRes = await fetch('/api/uploaded-receipts');
+      if (receiptsRes.ok) {
+        const data = await receiptsRes.json();
+        setUploadedReceipts(data);
+      }
     } catch (err) {
-      console.error("Failed to load list/history assets:", err);
+      console.error("Failed to load list/history/receipts assets:", err);
     }
   };
 
@@ -203,12 +209,14 @@ function App() {
 
     try {
       let parts: any[] = [];
+      let base64String = '';
       if (userText.trim()) {
         parts.push({ text: userText });
       }
 
       if (imgFile) {
         const base64Data = await convertToBase64(imgFile);
+        base64String = base64Data;
         parts.push({
           inlineData: {
             data: base64Data,
@@ -239,6 +247,26 @@ function App() {
 
       const events = await response.json();
       processEvents(events);
+
+      // Save receipt to backend since it was accepted and run completed
+      if (imgFile && base64String) {
+        const timestamp = Date.now();
+        const fileName = imgFile.name 
+          ? `receipt_${timestamp}_${imgFile.name.replace(/[^a-zA-Z0-9._-]/g, '_')}` 
+          : `receipt_${timestamp}.png`;
+        try {
+          await fetch('/api/save-receipt', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              fileName,
+              base64Data: base64String
+            })
+          });
+        } catch (err) {
+          console.error("Failed to save receipt to backend:", err);
+        }
+      }
     } catch (err: any) {
       setMessages(prev => [
         ...prev,
@@ -492,6 +520,42 @@ function App() {
     );
   };
 
+  // Format receipts log view
+  const renderReceiptsLog = () => {
+    if (!uploadedReceipts || uploadedReceipts.length === 0) {
+      return (
+        <div className="empty-panel-message">
+          <p>No uploaded receipts found.</p>
+          <p className="hint">Attach a receipt or grocery photo and send a message to log it here.</p>
+        </div>
+      );
+    }
+
+    return (
+      <div className="receipts-log-container">
+        <div className="receipts-grid">
+          {uploadedReceipts.map((fileName) => {
+            const displayName = fileName.replace(/^receipt_\d+_/, '');
+            const fileUrl = `/api/receipts/${fileName}`;
+            return (
+              <div key={fileName} className="receipt-thumbnail-card">
+                <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="receipt-img-link">
+                  <img src={fileUrl} alt={displayName} />
+                </a>
+                <div className="receipt-info">
+                  <span className="receipt-name" title={displayName}>{displayName}</span>
+                  <a href={fileUrl} download={displayName} className="btn-download-receipt">
+                    📥 Download
+                  </a>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="app-container">
       {/* HEADER */}
@@ -635,10 +699,18 @@ function App() {
             >
               💵 Purchase History
             </button>
+            <button 
+              className={`tab-btn ${activeTab === 'receipts-log' ? 'active' : ''}`}
+              onClick={() => setActiveTab('receipts-log')}
+            >
+              🧾 Receipts Log
+            </button>
           </div>
           
           <div className="tab-body">
-            {activeTab === 'shopping-list' ? renderShoppingList() : renderShoppingHistory()}
+            {activeTab === 'shopping-list' && renderShoppingList()}
+            {activeTab === 'shopping-history' && renderShoppingHistory()}
+            {activeTab === 'receipts-log' && renderReceiptsLog()}
           </div>
         </section>
       </main>

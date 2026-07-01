@@ -79,6 +79,45 @@ app: FastAPI = get_fast_api_app(
 app.title = "cooking-shopping-assistant"
 app.description = "API for interacting with the Agent cooking-shopping-assistant"
 
+from fastapi.staticfiles import StaticFiles
+upload_dir = os.path.join(AGENT_DIR, "uploaded_receipts")
+os.makedirs(upload_dir, exist_ok=True)
+app.mount("/receipts", StaticFiles(directory=upload_dir), name="receipts")
+
+class SaveReceiptRequest(BaseModel):
+    fileName: str
+    base64Data: str
+
+@app.post("/save-receipt")
+def save_receipt(req: SaveReceiptRequest):
+    """Saves an uploaded receipt image to the local uploads directory."""
+    import base64
+    from fastapi import HTTPException
+    
+    # Clean base64 header if present
+    data = req.base64Data
+    if "," in data:
+        data = data.split(",")[1]
+        
+    file_path = os.path.join(upload_dir, req.fileName)
+    try:
+        with open(file_path, "wb") as f:
+            f.write(base64.b64decode(data))
+        return {"status": "success", "url": f"/api/receipts/{req.fileName}"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/uploaded-receipts")
+def list_uploaded_receipts():
+    """Lists the filenames of all saved receipt images."""
+    from fastapi import HTTPException
+    try:
+        files = [f for f in os.listdir(upload_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp'))]
+        # Sort by creation time (newest first)
+        files.sort(key=lambda x: os.path.getmtime(os.path.join(upload_dir, x)), reverse=True)
+        return files
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/feedback")
 def collect_feedback(feedback: Feedback) -> dict[str, str]:
