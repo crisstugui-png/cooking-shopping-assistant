@@ -70,5 +70,52 @@
       }
     ],
     "total_cost": 50.0
+  },
+  {
+    "date": "2026-07-02",
+    "items": [
+      {
+        "name": "ground beef",
+        "price": 30.0,
+        "quantity": 2
+      }
+    ],
+    "total_cost": 60.0
+  },
+  {
+    "date": "2023-10-15",
+    "items": [
+      {
+        "name": "Salmon Fillet (230g)",
+        "price": 13.34,
+        "quantity": 1
+      },
+      {
+        "name": "Broccoli, head (1)",
+        "price": 3.1,
+        "quantity": 1
+      },
+      {
+        "name": "Lemon (0.5 kg)",
+        "price": 2.2,
+        "quantity": 1
+      },
+      {
+        "name": "Fresh Dill, bunch (1)",
+        "price": 1.95,
+        "quantity": 1
+      },
+      {
+        "name": "Olive Oil (1 tbsp)",
+        "price": 1.5,
+        "quantity": 1
+      },
+      {
+        "name": "Salt & Pepper (mix/sachet)",
+        "price": 0.8,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 22.89
   }
 ]
