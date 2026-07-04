@@ -32,28 +32,7 @@ Our submission is a unified, session-sticky personal assistant that bridges the 
 
 The core of the application is an agentic state machine designed using the **ADK Workflow** framework. 
 
-```mermaid
-graph TD
-    START([Start]) --> OCR[ocr_preprocessor Node]
-    OCR --> SEC_GATE{security_gate Node}
-    SEC_GATE -- Hijack Flagged --> HITL[Human-in-the-Loop confirmation]
-    HITL -- Reject --> ABORT([Abort/Halt])
-    HITL -- Approve --> INTENT[intent_classifier Node]
-    SEC_GATE -- Safe --> INTENT
-    INTENT --> ROUTE{router Node}
-    
-    ROUTE -- "cooking (or sticky cooking)" --> COOK_AGT[cooking_agent LlmAgent]
-    ROUTE -- "budget (or sticky budget)" --> BUD_AGT[budget_agent LlmAgent]
-    ROUTE -- "unknown" --> UNKNOWN[handle_unknown Node]
-    
-    COOK_AGT --> CHK_DONE{check_cooking_done Node}
-    CHK_DONE -- "recipe_ready == True" --> SHOP_AGT[shopping_agent Node]
-    CHK_DONE -- "recipe_ready == False" --> END([End Turn])
-    
-    SHOP_AGT --> END
-    BUD_AGT --> END
-    UNKNOWN --> END
-```
+![BiteBudget System Architecture & Workflow Diagram](./workflow_diagram.png)
 
 ### State Management (`WorkflowState`)
 We utilize a persistent state schema subclassing Pydantic's `BaseModel`:
