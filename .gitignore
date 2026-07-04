@@ -202,3 +202,7 @@ my_env.tfvars
 
 # A2A Inspector
 tools/a2a-inspector/
+
+# Evaluation artifacts and uploads
+artifacts/
+uploaded_receipts/
