@@ -114,11 +114,13 @@ We enforced reliability through a thorough testing hierarchy:
 
 1.  **Unit Tests:** Verifies core utility functions like OCR parsing, regex PII redaction, and state schema compliance.
 2.  **Integration & E2E Tests:** Launches the FastAPI server in a subprocess and runs simulated HTTP request streams (SSE) to test full-turn conversations.
-3.  **Prompt & Workflow Evaluations (`agents-cli eval`):**
-    *   Configured custom LLM-as-a-judge metrics in [eval_config.yaml](file:///Users/cristina/Desktop/kaggle_vibe_coding/cooking_shopping_capstone_project/cooking-shopping-assistant/tests/eval/eval_config.yaml).
-    *   `custom_response_quality`: Grades the output from 1 to 5 based on relevance, accuracy, and structure.
-    *   `agent_turn_count`: Evaluates conversation turn efficiency.
-    *   We continuously iterated on system instructions to minimize false positives/negatives in intent classification.
+3.  **Local-First Evaluation Suite (`run_local_eval.py`):**
+    *   **Capability-Aligned Dataset:** Implemented a dataset of 6 realistic evaluation cases covering dinner suggestions, multi-turn recipe finalization, purchase logging, PII redaction checks, prompt injection attempts (security gate), and future trip logging pushbacks.
+    *   **Configured Metrics:** Evaluates traces using `custom_response_quality`, `agent_turn_count`, `multi_turn_task_success`, and `multi_turn_tool_use_quality` metrics.
+    *   **LLM-as-a-Judge Grading:** Employs `gemini-flash-lite-latest` using the local Developer API key, bypassing Vertex AI Cloud dependencies.
+    *   **PII & Safety Validation:** Confirms that the prompt hijacking gate correctly blocks attacks (raising a `confirm_hijack` interrupt) and the PII preprocessor redacts sensitive data (phone, email, cards) without leaking details to trace logs.
+4.  **Synthetic User Simulation:**
+    *   Uses a local simulation pipeline to automatically play out multi-turn conversations between the agent and a Gemini-backed simulated user, producing realistic synthetic logs under `synthetic-dataset.json` for regression testing.
 
 ---
 
