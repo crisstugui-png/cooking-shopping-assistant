@@ -1,0 +1,367 @@
+{
+  "eval_cases": [
+    {
+      "eval_case_id": "synthetic_case_1",
+      "agent_data": {
+        "agents": {
+          "cooking_shopping_agent": {
+            "agent_id": "cooking_shopping_agent",
+            "instruction": "Cooking and Shopping Assistant workflow"
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "events": [
+              {
+                "author": "user",
+                "content": {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "text": "Could you recommend a simple homemade pizza recipe that won't break my food budget?"
+                    }
+                  ]
+                }
+              },
+              {
+                "author": "app",
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "text": "Homemade pizza is a fantastic budget-friendly meal! You can make a delicious, classic Margherita-style pizza for a fraction of the cost of delivery.\n\nHere is a simple, affordable recipe:\n\n### **Budget-Friendly Homemade Pizza**\n\n**Ingredients:**\n*   **Dough:** 2 \u00bd cups all-purpose flour, 1 packet instant yeast (or 2 \u00bc tsp), 1 tsp salt, 1 tsp sugar, 1 cup warm water, 1 tbsp olive oil.\n*   **Sauce:** 1 small can (8 oz) tomato sauce, 1 tsp dried oregano, \u00bd tsp garlic powder, salt and pepper to taste.\n*   **Toppings:** 8 oz shredded mozzarella cheese.\n\n**Instructions:**\n1.  **Dough:** Mix flour, yeast, salt, and sugar in a bowl. Add warm water and oil. Stir until a ball forms, then knead on a floured surface for 5 minutes. Let it rest for 15-20 minutes.\n2.  **Prep:** Preheat your oven to 425\u00b0F (220\u00b0C).\n3.  **Assemble:** Roll or stretch the dough onto a baking sheet or pizza pan. Spread the mixed sauce, then sprinkle with cheese.\n4.  **Bake:** Bake for 12\u201315 minutes until the crust is golden and the cheese is bubbly.\n\n**Cost-saving tip:** Buy generic/store-brand flour and canned tomato sauce\u2014they work just as well as name brands for pizza!\n\nDoes this sound like something you'd like to try, or would you like to add some specific toppings? If you're happy with this, I can finalize it and get your shopping list ready!"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "turn_index": 1,
+            "events": [
+              {
+                "author": "user",
+                "content": {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "text": "That recipe sounds perfect and very budget-friendly! I'm happy with those ingredients, so let's go with that. Please finalize it and get the shopping list ready for me."
+                    }
+                  ]
+                }
+              },
+              {
+                "author": "app",
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "function_call": {
+                        "name": "finish_recipe",
+                        "args": {
+                          "ingredients": [
+                            "all-purpose flour",
+                            "instant yeast",
+                            "salt",
+                            "sugar",
+                            "warm water",
+                            "olive oil",
+                            "tomato sauce",
+                            "dried oregano",
+                            "garlic powder",
+                            "shredded mozzarella cheese"
+                          ],
+                          "quantities": [
+                            "2 1/2 cups",
+                            "1 packet",
+                            "1 tsp",
+                            "1 tsp",
+                            "1 cup",
+                            "1 tbsp",
+                            "8 oz can",
+                            "1 tsp",
+                            "1/2 tsp",
+                            "8 oz"
+                          ],
+                          "recipe_name": "Budget-Friendly Homemade Pizza"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "author": "app",
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "text": "Great choice! I have finalized your **Budget-Friendly Homemade Pizza** recipe and prepared your shopping list. You're all set to make a delicious and affordable meal! Enjoy your cooking!"
+                    }
+                  ]
+                }
+              },
+              {
+                "author": "app",
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "text": "# Shopping List for Budget-Friendly Homemade Pizza\nGenerated on 2026-07-04 20:49:31\n\nHere are the ingredients you need to buy:\n\n- [ ] **all-purpose flour** (2 1/2 cups)\n- [ ] **instant yeast** (1 packet)\n- [ ] **salt** (1 tsp)\n- [ ] **sugar** (1 tsp)\n- [ ] **warm water** (1 cup)\n- [ ] **olive oil** (1 tbsp)\n- [ ] **tomato sauce** (8 oz can)\n- [ ] **dried oregano** (1 tsp)\n- [ ] **garlic powder** (1/2 tsp)\n- [ ] **shredded mozzarella cheese** (8 oz)\n\n*Saved shopping list to [shopping_list.md](file:///Users/cristina/Desktop/kaggle_vibe_coding/cooking_shopping_capstone_project/cooking-shopping-assistant/shopping_list.md)*"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "eval_case_id": "synthetic_case_2",
+      "agent_data": {
+        "agents": {
+          "cooking_shopping_agent": {
+            "agent_id": "cooking_shopping_agent",
+            "instruction": "Cooking and Shopping Assistant workflow"
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "events": [
+              {
+                "author": "user",
+                "content": {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "text": "I bought bread for $3.00, milk for $4.00, and eggs for $5.50 today; please log these expenses."
+                    }
+                  ]
+                }
+              },
+              {
+                "author": "app",
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "function_call": {
+                        "name": "record_purchase",
+                        "args": {
+                          "items": [
+                            {
+                              "price": 3,
+                              "name": "bread"
+                            },
+                            {
+                              "name": "milk",
+                              "price": 4
+                            },
+                            {
+                              "price": 5.5,
+                              "name": "eggs"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "author": "app",
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "text": "OK! I've logged your purchase of bread, milk, and eggs for a total of $12.50 today."
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "turn_index": 1,
+            "events": [
+              {
+                "author": "user",
+                "content": {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "text": "Thanks, what is my remaining budget for the week?"
+                    }
+                  ]
+                }
+              },
+              {
+                "author": "app",
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "text": "I'd be happy to help you with that! However, I don't currently have your weekly budget amount on file.\n\nCould you please tell me what your total budget is for the week? Once you let me know, I can subtract your spending (which is currently $12.50) and give you your remaining balance."
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "turn_index": 2,
+            "events": [
+              {
+                "author": "user",
+                "content": {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "text": "My total budget for the week is $50.00."
+                    }
+                  ]
+                }
+              },
+              {
+                "author": "app",
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "text": "Thanks! Since your total budget for the week is $50.00 and you've spent $12.50 today, your remaining budget for the week is **$37.50**."
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "eval_case_id": "synthetic_case_3",
+      "agent_data": {
+        "agents": {
+          "cooking_shopping_agent": {
+            "agent_id": "cooking_shopping_agent",
+            "instruction": "Cooking and Shopping Assistant workflow"
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "events": [
+              {
+                "author": "user",
+                "content": {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "text": "How much have I spent on groceries in total so far?"
+                    }
+                  ]
+                }
+              },
+              {
+                "author": "app",
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "function_call": {
+                        "name": "get_shopping_history",
+                        "args": {}
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "author": "app",
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "text": "You have spent a total of $333.39 on groceries so far."
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "turn_index": 1,
+            "events": [
+              {
+                "author": "user",
+                "content": {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "text": "Can you break that down by month for me?"
+                    }
+                  ]
+                }
+              },
+              {
+                "author": "app",
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "function_call": {
+                        "name": "get_shopping_history",
+                        "args": {}
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "author": "app",
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "text": "Here is the breakdown of your grocery spending by month:\n\n*   **October 2023:** $122.89\n*   **July 2026:** $210.50\n\n**Total:** $333.39"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "turn_index": 2,
+            "events": [
+              {
+                "author": "user",
+                "content": {
+                  "role": "user",
+                  "parts": [
+                    {
+                      "text": "Which stores did I visit in July 2026?"
+                    }
+                  ]
+                }
+              },
+              {
+                "author": "app",
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "text": "I'm sorry, but my records don't currently include the names of the stores where you made your purchases\u2014I only have the dates, the items bought, and the costs associated with them. \n\nIf you'd like, you can let me know the store name next time you log a purchase, and I can include that information for you!"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

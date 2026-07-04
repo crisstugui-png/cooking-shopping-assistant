@@ -117,5 +117,345 @@
       }
     ],
     "total_cost": 22.89
+  },
+  {
+    "date": "2023-10-15",
+    "items": [
+      {
+        "name": "Premium Ground Beef (approx. 450g)",
+        "price": 16.5,
+        "quantity": 1
+      },
+      {
+        "name": "Breadcrumbs, Store Brand (400g Pack)",
+        "price": 3.9,
+        "quantity": 1
+      },
+      {
+        "name": "Grated Parmigiano Reggiano (150g Bag)",
+        "price": 6.5,
+        "quantity": 1
+      },
+      {
+        "name": "Eggs, Free-Range (Carton of 6)",
+        "price": 5.5,
+        "quantity": 1
+      },
+      {
+        "name": "Garlic (1 Bulb)",
+        "price": 1.8,
+        "quantity": 1
+      },
+      {
+        "name": "Spaghetti, Durum Wheat (500g Pack)",
+        "price": 3.2,
+        "quantity": 1
+      },
+      {
+        "name": "Marinara Sauce, Tomato-Basil (24 oz Jar)",
+        "price": 7.8,
+        "quantity": 1
+      },
+      {
+        "name": "Fresh Parsley (1 Bunch)",
+        "price": 2.5,
+        "quantity": 1
+      },
+      {
+        "name": "Olive Oil (1 tbsp - small portion)",
+        "price": 1.5,
+        "quantity": 1
+      },
+      {
+        "name": "Salt & Pepper (mixed packet)",
+        "price": 0.8,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 50.0
+  },
+  {
+    "date": "2026-07-03",
+    "items": [
+      {
+        "name": "carton of milk",
+        "price": 3.5,
+        "quantity": 2
+      },
+      {
+        "name": "loaf of bread",
+        "price": 2.5,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 9.5
+  },
+  {
+    "date": "2026-07-03",
+    "items": [
+      {
+        "name": "bread",
+        "price": 3.0,
+        "quantity": 1
+      },
+      {
+        "name": "milk",
+        "price": 4.0,
+        "quantity": 1
+      },
+      {
+        "name": "eggs",
+        "price": 5.5,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 12.5
+  },
+  {
+    "date": "2026-07-03",
+    "items": [
+      {
+        "name": "bread",
+        "price": 3.0,
+        "quantity": 1
+      },
+      {
+        "name": "milk",
+        "price": 4.0,
+        "quantity": 1
+      },
+      {
+        "name": "eggs",
+        "price": 5.5,
+        "quantity": 1
+      },
+      {
+        "name": "butter",
+        "price": 4.5,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 17.0
+  },
+  {
+    "date": "2026-07-03",
+    "items": [
+      {
+        "name": "milk",
+        "price": 3.5,
+        "quantity": 2
+      },
+      {
+        "name": "bread",
+        "price": 2.5,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 9.5
+  },
+  {
+    "date": "2026-07-03",
+    "items": [
+      {
+        "name": "bread",
+        "price": 3.0,
+        "quantity": 1
+      },
+      {
+        "name": "milk",
+        "price": 4.0,
+        "quantity": 1
+      },
+      {
+        "name": "eggs",
+        "price": 5.5,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 12.5
+  },
+  {
+    "date": "2026-07-03",
+    "items": [
+      {
+        "name": "milk",
+        "price": 3.5,
+        "quantity": 2
+      },
+      {
+        "name": "loaf of bread",
+        "price": 2.5,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 9.5
+  },
+  {
+    "date": "2026-07-03",
+    "items": [
+      {
+        "name": "bread",
+        "price": 3.0,
+        "quantity": 1
+      },
+      {
+        "name": "milk",
+        "price": 4.0,
+        "quantity": 1
+      },
+      {
+        "name": "eggs",
+        "price": 5.5,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 12.5
+  },
+  {
+    "date": "2026-07-03",
+    "items": [
+      {
+        "name": "milk",
+        "price": 3.5,
+        "quantity": 2
+      },
+      {
+        "name": "bread",
+        "price": 2.5,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 9.5
+  },
+  {
+    "date": "2026-07-03",
+    "items": [
+      {
+        "name": "bread",
+        "price": 3.0,
+        "quantity": 1
+      },
+      {
+        "name": "milk",
+        "price": 4.0,
+        "quantity": 1
+      },
+      {
+        "name": "eggs",
+        "price": 5.5,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 12.5
+  },
+  {
+    "date": "2026-07-04",
+    "items": [
+      {
+        "name": "milk",
+        "price": 3.5,
+        "quantity": 2
+      },
+      {
+        "name": "bread",
+        "price": 2.5,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 9.5
+  },
+  {
+    "date": "2026-07-04",
+    "items": [
+      {
+        "name": "bread",
+        "price": 3.0,
+        "quantity": 1
+      },
+      {
+        "name": "milk",
+        "price": 4.0,
+        "quantity": 1
+      },
+      {
+        "name": "eggs",
+        "price": 5.5,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 12.5
+  },
+  {
+    "date": "2026-07-04",
+    "items": [
+      {
+        "name": "milk",
+        "price": 3.5,
+        "quantity": 2
+      },
+      {
+        "name": "bread",
+        "price": 2.5,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 9.5
+  },
+  {
+    "date": "2026-07-04",
+    "items": [
+      {
+        "name": "bread",
+        "price": 3.0,
+        "quantity": 1
+      },
+      {
+        "name": "milk",
+        "price": 4.0,
+        "quantity": 1
+      },
+      {
+        "name": "eggs",
+        "price": 5.5,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 12.5
+  },
+  {
+    "date": "2023-10-15",
+    "items": [
+      {
+        "name": "Salmon Fillet",
+        "price": 13.34,
+        "quantity": 1
+      },
+      {
+        "name": "Broccoli, head",
+        "price": 3.1,
+        "quantity": 1
+      },
+      {
+        "name": "Lemon",
+        "price": 2.2,
+        "quantity": 1
+      },
+      {
+        "name": "Fresh Dill, bunch",
+        "price": 1.95,
+        "quantity": 1
+      },
+      {
+        "name": "Olive Oil, 1 tbsp",
+        "price": 1.5,
+        "quantity": 1
+      },
+      {
+        "name": "Salt & Pepper (mix/sachet)",
+        "price": 0.8,
+        "quantity": 1
+      }
+    ],
+    "total_cost": 22.89
   }
 ]

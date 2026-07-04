@@ -1,13 +1,21 @@
-# Shopping List for Pan-Seared Salmon & Broccoli for 5
-Generated on 2026-07-02 20:18:12
+# Shopping List for Classic Spaghetti and Meatballs
+Generated on 2026-07-04 21:42:14
 
 Here are the ingredients you need to buy:
 
-- [ ] **Salmon fillets** (5 fillets)
-- [ ] **Broccoli** (3 large heads)
-- [ ] **Olive oil** (3 tbsp)
-- [ ] **Butter** (2 tbsp)
-- [ ] **Fresh dill** (1 bunch)
+- [ ] **Ground beef (or beef/pork mix)** (1 lb)
+- [ ] **Breadcrumbs** (1/2 cup)
+- [ ] **Milk** (1/4 cup)
+- [ ] **Egg** (1 large)
+- [ ] **Grated Parmesan** (1/2 cup)
+- [ ] **Garlic** (4 cloves)
+- [ ] **Fresh parsley** (1/4 cup chopped)
 - [ ] **Salt** (to taste)
-- [ ] **Black pepper** (to taste)
-- [ ] **Lemon** (1)
+- [ ] **Pepper** (to taste)
+- [ ] **Olive oil** (2 tbsp)
+- [ ] **Onion** (1 medium)
+- [ ] **Canned crushed or diced tomatoes** (28 oz can)
+- [ ] **Tomato paste** (2 tbsp)
+- [ ] **Dried oregano or Italian seasoning** (1 tsp)
+- [ ] **Fresh basil** (1 bunch)
+- [ ] **Spaghetti** (1 lb)
